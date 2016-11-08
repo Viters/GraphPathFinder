@@ -4,10 +4,10 @@ import java.util.ArrayList;
  * Created by sir.viters on 05.11.2016.
  */
 class Node {
-    protected final long id;
-    protected double lon;
-    protected double lat;
-    protected ArrayList<Connection> neighbours;
+    private final long id;
+    private double lon;
+    private double lat;
+    private ArrayList<Connection> neighbours;
 
     Node(long id) {
         this.id = id;
@@ -41,13 +41,5 @@ class Node {
     void addNeighbour(Node node, double distance) {
         Connection connection = new Connection(node, distance);
         neighbours.add(connection);
-    }
-
-    Connection getNeighbour(Node node) {
-        for (Connection neighbour : neighbours) {
-            if (neighbour.getNode() == node)
-                return neighbour;
-        }
-        return null;
     }
 }

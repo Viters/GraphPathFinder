@@ -4,26 +4,26 @@ import java.util.*;
  * Created by sir.viters on 05.11.2016.
  */
 class Dijkstra {
-    private HashMap<Long, DijkstraNode> dijkstraNodes;
-    private PriorityQueue<DijkstraNode> nodePriorityQueue;
-    private ArrayList<DijkstraNode> way;
+    private HashMap<Long, MemoryNode> dijkstraNodes;
+    private PriorityQueue<MemoryNode> nodePriorityQueue;
+    private ArrayList<MemoryNode> way;
 
     Dijkstra(HashMap<Long, Node> nodes) {
         dijkstraNodes = new HashMap<>();
-        nodes.forEach((k, v) -> dijkstraNodes.put(k, new DijkstraNode(v)));
+        nodes.forEach((k, v) -> dijkstraNodes.put(k, new MemoryNode(v)));
         nodePriorityQueue = new PriorityQueue<>();
         way = new ArrayList<>();
     }
 
     void run(Long start, Long end) {
-        DijkstraNode dijkstraStart = dijkstraNodes.get(start);
+        MemoryNode dijkstraStart = dijkstraNodes.get(start);
         dijkstraStart.setDistance(0.0);
         nodePriorityQueue.add(dijkstraStart);
-        dijkstra();
+        dijkstra(end);
         getShortestWay(end);
     }
 
-    ArrayList<DijkstraNode> getWay() {
+    ArrayList<MemoryNode> getWay() {
         return way;
     }
     
@@ -31,16 +31,18 @@ class Dijkstra {
         return way.get(way.size() - 1).getDistance();
     }
 
-    private void dijkstra() {
-        DijkstraNode current;
+    private void dijkstra(Long end) {
+        MemoryNode current;
         while (!nodePriorityQueue.isEmpty()) {
             current = nodePriorityQueue.poll();
             for (Connection connection : current.getNode().getNeighbours()) {
-                DijkstraNode neighbour = dijkstraNodes.get(connection.getNode().getId());
+                MemoryNode neighbour = dijkstraNodes.get(connection.getNode().getId());
                 double distanceFromBeg = current.getDistance() + connection.getDistance();
                 if (neighbour.getDistance() > distanceFromBeg) {
                     neighbour.setDistance(distanceFromBeg);
                     neighbour.setPreviousNode(current);
+                    if (neighbour.getNode().getId() == end)
+                        return;
                     nodePriorityQueue.add(neighbour);
                 }
             }
@@ -48,7 +50,7 @@ class Dijkstra {
     }
 
     private void getShortestWay(Long end) {
-        DijkstraNode current = dijkstraNodes.get(end);
+        MemoryNode current = dijkstraNodes.get(end);
         while (current != null) {
             way.add(current);
             current = current.getPreviousNode();
