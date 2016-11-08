@@ -17,9 +17,4 @@ class Connection {
     double getDistance() {
         return distance;
     }
-
-    @Override
-    public String toString() {
-        return "ID: " + node.getId() + ", distance: " + distance;
-    }
 }

@@ -31,29 +31,11 @@ class MemoryNode implements Comparable<MemoryNode> {
         this.previousNode = previousNode;
     }
 
-    double calcDistance(Node node) {
-        double lon1 = this.getNode().getLon();
-        double lat1 = this.getNode().getLat();
-        double lon2 = node.getLon();
-        double lat2 = node.getLat();
-
-        double latDiff = lat2 - lat1;
-        double lonDiff = lon2 - lon1;
-        double latDistance = Math.toRadians(latDiff);
-        double lonDistance = Math.toRadians(lonDiff);
-
-        double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2)
-                + Math.cos(Math.toRadians(lat2)) * Math.cos(Math.toRadians(lat1))
-                * Math.sin(lonDistance / 2) * Math.sin(lonDistance / 2);
-
-        return 6371e3 * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    }
-
     @Override
     public int compareTo(MemoryNode o) {
-        if (distance > o.getDistance())
+        if (distance > o.distance)
             return 1;
-        else if(distance < o.getDistance())
+        else if(distance < o.distance)
             return -1;
         return 0;
     }
