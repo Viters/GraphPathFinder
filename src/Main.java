@@ -2,14 +2,14 @@ public class Main {
 
     public static void main(String[] args) {
 	    DataParser dataParser = new DataParser();
-        dataParser.parseFile("small.txt");
+        dataParser.parseFile("big.txt");
 
         System.out.println("Dijkstra:");
 
         Dijkstra dijkstra = new Dijkstra(dataParser.getNodes());
 
         long startTime = System.currentTimeMillis();
-        dijkstra.run(226009912L, 2503558048L);
+        dijkstra.run(2996088770L, 1387833107L);
         long estimatedTime = System.currentTimeMillis() - startTime;
 
         System.out.println("Time: " + estimatedTime + "ms");
@@ -22,7 +22,7 @@ public class Main {
         AStar aStar = new AStar(dataParser.getNodes());
 
         startTime = System.currentTimeMillis();
-        aStar.run(226009912L, 2503558048L);
+        aStar.run(2996088770L, 1387833107L);
         estimatedTime = System.currentTimeMillis() - startTime;
 
         System.out.println("Time: " + estimatedTime + "ms");
