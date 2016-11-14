@@ -3,9 +3,18 @@
  */
 class AStarNode extends MemoryNode implements Comparable<MemoryNode> {
     private double estimatedDistance = Double.MAX_VALUE;
+    private double heuristics = -1;
 
     AStarNode(Node node) {
         super(node);
+    }
+
+    public double getHeuristics() {
+        return heuristics;
+    }
+
+    public void setHeuristics(double heuristics) {
+        this.heuristics = heuristics;
     }
 
     double calculateHeuristics(Node node) {

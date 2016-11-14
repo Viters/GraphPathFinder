@@ -43,9 +43,17 @@ class AStar extends Alghoritm<AStarNode> {
                 double distanceFromBeg = current.getDistance() + connection.getDistance();
 
                 if (distanceFromBeg < neighbour.getDistance()) {
+                    double heuristics;
+                    if (neighbour.getHeuristics() != -1) {
+                        heuristics = neighbour.getHeuristics();
+                    }
+                    else {
+                        heuristics = neighbour.calculateHeuristics(end.getNode());
+                        neighbour.setHeuristics(heuristics);
+                    }
                     neighbour.setPreviousNode(current);
                     neighbour.setDistance(distanceFromBeg);
-                    neighbour.setEstimatedDistance(neighbour.getDistance() + neighbour.calculateHeuristics(end.getNode()));
+                    neighbour.setEstimatedDistance(neighbour.getDistance() + heuristics);
                 }
                 if (!nodePriorityQueue.contains(neighbour)) {
                     nodePriorityQueue.add(neighbour);
