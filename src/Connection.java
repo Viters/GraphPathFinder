@@ -1,7 +1,9 @@
+import java.io.Serializable;
+
 /**
  * Created by sir.viters on 05.11.2016.
  */
-class Connection {
+class Connection implements Serializable {
     private final Node node;
     private final double distance;
 

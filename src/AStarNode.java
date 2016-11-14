@@ -9,11 +9,11 @@ class AStarNode extends MemoryNode implements Comparable<MemoryNode> {
         super(node);
     }
 
-    public double getHeuristics() {
+    double getHeuristics() {
         return heuristics;
     }
 
-    public void setHeuristics(double heuristics) {
+    void setHeuristics(double heuristics) {
         this.heuristics = heuristics;
     }
 

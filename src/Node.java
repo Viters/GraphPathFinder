@@ -1,9 +1,10 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by sir.viters on 05.11.2016.
  */
-class Node {
+class Node implements Serializable {
     private final long id;
     private double lon;
     private double lat;
